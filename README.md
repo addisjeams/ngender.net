@@ -2,10 +2,10 @@
 根据中文的汉字判断这个人的性别，来源于observerss/ngender，我将它改为C#/Csharp版本
 
 
-用法很简单：
-var 结果1 = Guess("赵本三");
-var 结果2 = Guess("白素贞");
-var 结果3 = Guess("林晓晴");
+用法很简单：<br />
+var 结果1 = Guess("赵本三");<br />
+var 结果2 = Guess("白素贞");<br />
+var 结果3 = Guess("林晓晴");<br />
 
 
 暂时只支持单字姓，要复姓怎么办？
