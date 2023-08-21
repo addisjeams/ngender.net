@@ -4,13 +4,20 @@
 
 用法很简单：<br />
 ```csharp
-var 结果1 = Guess("赵本三");
-var 结果2 = Guess("白素贞");
-var 结果3 = Guess("林晓晴");
+                //纯靠概率学, 胜男会被认为男性(实际上叫这名字都应该是女的)
+        var resultGuess1 = Guess("振国").ToString();
+        var resultGuess2 = Guess("备").ToString();
+        var resultGuess3 = Guess("常风").ToString();
+        var resultGuess4 = Guess("不败").ToString();
+        var resultGuess5 = Guess("胜男").ToString();
 ```
 
+```csharp
+        //人工修订指定, 修改CharFrequency.cs中的appendFix的设置数据
+        var resultGuess6 = GuessWithFix("胜男").ToString();
+        var resultGuess7 = GuessWithFix("招娣").ToString();
+```
 
-
-暂时只支持单字姓，要复姓怎么办？
+注意!!!只输入名,不要输入姓
 请看源码，超级简单。
 祝大家使用愉快，如果想知道原理请看Python项目的首页有详细说明。
