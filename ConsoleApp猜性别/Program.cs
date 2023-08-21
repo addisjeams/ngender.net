@@ -2,14 +2,21 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        string name = string.Empty;
-        do
-        {
-            Console.WriteLine("请输入某人名字(全名, 例如赵本山，刘玄德……):");
-            name = Console.ReadLine();
-        } while (string.IsNullOrWhiteSpace(name));
 
-        var resultGuess = Guess(name).ToString();
+
+        //纯靠概率学, 胜男会被认为男性(实际上叫这名字都应该是女的)
+        var resultGuess1 = Guess("振国").ToString();
+        var resultGuess2 = Guess("备").ToString();
+        var resultGuess3 = Guess("常风").ToString();
+        var resultGuess4 = Guess("不败").ToString();
+        var resultGuess5 = Guess("胜男").ToString();
+
+        //人工修订指定, 修改CharFrequency.cs中的appendFix的设置数据
+        var resultGuess6 = GuessWithFix("胜男").ToString();
+        var resultGuess7 = GuessWithFix("招娣").ToString();
+
+
+
 
 
         Console.WriteLine("Hello, World!");
@@ -21,14 +28,12 @@ internal class Program
     /// <summary>
     /// 判断该人男女的概率
     /// </summary>
-    /// <param name="full_name">输入的一个人的姓名</param>
+    /// <param name="justName">输入的一个人的名, 只是名字, 不带姓, 比如刘备输入"备", 比如东方不败输入"不败"</param>
     /// <returns></returns>
-    public static (hmGender 性别, double 概率) Guess(string full_name)
+    public static (hmGender 性别, double 概率) Guess(string justName)
     {
-        string firstname = full_name.Substring(1);
-
-        double pf = ProbForGender(firstname, 0);
-        double pm = ProbForGender(firstname, 1);
+        double pf = ProbForGender(justName, 0);//作为女性评估概率
+        double pm = ProbForGender(justName, 1);//作为男性评估概率
 
         if (pm >= pf) //明显是男性
         {
@@ -38,8 +43,31 @@ internal class Program
         {
             return (hmGender.Female, pf / (pm + pf));
         }
-
     }
+
+    /// <summary>
+    /// 人工修订+概率判断该人男女
+    /// </summary>
+    /// <param name="justName">输入的一个人的名, 只是名字, 不带姓, 比如刘备输入"备", 比如东方不败输入"不败"</param>
+    /// <returns></returns>
+    public static (hmGender 性别, double 概率) GuessWithFix(string justName)
+    {
+        if (CharFrequency.dic_fix.TryGetValue(justName,out hmGender gender))
+        {
+            return (gender, 1.0d);//强制认为100%, 你们可以设置为80%也就是0.8
+        }
+        else
+        {
+            return Guess(justName);
+        }
+    }
+
+
+
+
+
+
+
 
     /// <summary>
     /// 计算当前名字是某个性别的概率
@@ -47,7 +75,7 @@ internal class Program
     /// <param name="justName">抛开姓以外, 隶属于名的部分</param>
     /// <param name="gender">0==女性, 1==男性</param>
     /// <returns>返回值是一个百分比数字, 0-1之间的数值, 表示一个概率</returns>
-    public static double ProbForGender(string justName, int gender = 0)
+    private static double ProbForGender(string justName, int gender = 0)
     {
         double p = 0D;
         if (gender == 0)
@@ -78,24 +106,24 @@ internal class Program
     }
 
 
+
+
+}//class
+
+
+
+/// <summary>
+/// 性别定义的枚举值
+/// </summary>
+public enum hmGender
+{
     /// <summary>
-    /// 性别定义的枚举值
+    /// 女性
     /// </summary>
-    public enum hmGender
-    {
-        /// <summary>
-        /// 女性
-        /// </summary>
-        Female = 0,
-        /// <summary>
-        /// 男性
-        /// </summary>
-        Male = 1,
-
-    }
-
-
-
-
+    Female = 0,
+    /// <summary>
+    /// 男性
+    /// </summary>
+    Male = 1,
 
 }
