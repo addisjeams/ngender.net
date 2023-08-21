@@ -4,9 +4,9 @@
 
 用法很简单：<br />
 ```csharp
-var 结果1 = Guess("赵本三");<br />
-var 结果2 = Guess("白素贞");<br />
-var 结果3 = Guess("林晓晴");<br />
+var 结果1 = Guess("赵本三");
+var 结果2 = Guess("白素贞");
+var 结果3 = Guess("林晓晴");
 ```
 
 
