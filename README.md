@@ -15,8 +15,8 @@
 因为“胜男”这样的名字，我额外扩展一定手工指定，使用GuessWithFix方法自己解决问题。用法如下，两个方法也就是名字略微有区别。
 ```csharp
         //人工修订指定, 修改CharFrequency.cs中的appendFix的设置数据
-        var resultGuess6 = GuessWithFix("胜男").ToString();
-        var resultGuess7 = GuessWithFix("招娣").ToString();
+        var resultGuess6 = GuessWithFix("胜男");
+        var resultGuess7 = GuessWithFix("招娣");
 ```
 
 注意!!!只输入名,不要输入姓
