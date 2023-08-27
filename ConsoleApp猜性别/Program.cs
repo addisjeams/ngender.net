@@ -100,6 +100,13 @@ internal class Program
             {
                 p *= valuevalue.Item2;
             }
+            else //超出统计范畴
+            {           
+                double double_eps = 1d;
+                while (double_eps + 1.0 > 1.0)
+                    double_eps /= 2d;
+                p = double_eps; //不可赋值为0
+            }
         }
 
         return p;
